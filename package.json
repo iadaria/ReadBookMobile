@@ -2,6 +2,7 @@
   "name": "ReadBookMobile",
   "version": "0.0.1",
   "private": true,
+  "main": "src/index.js",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -39,5 +40,17 @@
   },
   "engines": {
     "node": ">=16"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
