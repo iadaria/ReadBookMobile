@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -15,16 +15,27 @@ import {
   View,
 } from 'react-native';
 
+type Chapter = {
+  tagName: string;
+  content: string;
+};
+
 function App(): JSX.Element {
+  const [chapter, setChapter] = useState<Chapter[]>([]);
   const isDarkMode = useColorScheme() === 'dark';
   useEffect(() => {
-    getCapter();
+    getCapter().then(chapter => setChapter(chapter));
   }, []);
 
   const getCapter = async () => {
-    const res = fetch('http://localhost:3001/chapter');
-    const data = (await res).json();
-    console.log({data});
+    const res: Response = await fetch('http://localhost:3001/chapter', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+    const response = await res.json();
+    return response.chapter || [];
   };
 
   return (
@@ -32,7 +43,9 @@ function App(): JSX.Element {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View>
-          <Text>Hi</Text>
+          {chapter.map(row => (
+            <Text>{row.content}</Text>
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
