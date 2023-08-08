@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -17,6 +17,15 @@ import {
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  useEffect(() => {
+    getCapter();
+  }, []);
+
+  const getCapter = async () => {
+    const res = fetch('http://localhost:3001/chapter');
+    const data = (await res).json();
+    console.log({data});
+  };
 
   return (
     <SafeAreaView>
