@@ -13,22 +13,55 @@ import {
   Text,
   useColorScheme,
   View,
+  PixelRatio,
+  GestureResponderEvent,
 } from 'react-native';
 
-type Chapter = {
+type Line = {
   tagName: string;
   content: string;
 };
 
+const Paragraph = ({words}: {words: string[]}): JSX.Element => {
+  const onTextPress = (event: GestureResponderEvent, txt: string) => {
+    console.log(event.nativeEvent.pageX);
+    console.log(txt);
+  };
+  const Words = words.map((word, index) => (
+    <Text
+      key={`item-${index}`}
+      onPress={event => onTextPress(event, word)}>{`${word} `}</Text>
+  ));
+  return <>{Words}</>;
+};
+
+const Chapter = ({lines}: {lines: Line[]}) => {
+  const Lines = lines.map(({content}, index) => {
+    const words = content.split(' ');
+    return (
+      <Text key={`item-${index}`}>
+        <Paragraph words={words} />
+      </Text>
+    );
+  });
+
+  return <>{Lines}</>;
+};
+
 function App(): JSX.Element {
-  const [chapter, setChapter] = useState<Chapter[]>([]);
+  const [chapter, setChapter] = useState<Line[]>([]);
   const isDarkMode = useColorScheme() === 'dark';
+
+  const font = PixelRatio.getFontScale();
+
+  console.log({font});
+
   useEffect(() => {
     getCapter().then(chapter => setChapter(chapter));
   }, []);
 
   const getCapter = async () => {
-    const res: Response = await fetch('http://localhost:3001/chapter', {
+    const res: Response = await fetch('http://192.168.1.117:3001/chapter', {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -43,46 +76,55 @@ function App(): JSX.Element {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View>
-          {chapter.map(row => (
-            <Text>{row.content}</Text>
-          ))}
+          <Chapter lines={chapter} />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-//import type {PropsWithChildren} from 'react';
+/* 
 
-/* type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+            {chapter.map(({content}, idx) => {
+            const words = content.split(' ');
+            console.log(words);
+            words.map(word => {
+              return (
+                <Text
+                  style={{fontSize: 14}}
+                  key={`item-${idx}`}
+                  onPress={event => {
+                    onTextPress(event, content);
+                  }}>
+                  {content}
+                </Text>
+              );
+            });
+          })}
 
-function Section({children, title}: SectionProps): JSX.Element {
-  return (
-    <View style={styles.sectionContainer}>
-      <Text style={[styles.sectionTitle]}>{title}</Text>
-      <Text style={[styles.sectionDescription]}>{children}</Text>
-    </View>
-  );
-} */
-/* const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-}); */
+  const onTextPress = (event: GestureResponderEvent, text: string) => {
+    console.log(event.nativeEvent.pageX);
+    console.log(event.nativeEvent.pageY);
+    console.log(text);
+    console.log(event.nativeEvent.locationX);
+    console.log(event.nativeEvent.locationY);
+  };
+
+<View
+  onLayout={event => {
+    const {x, y, width, height} = event.nativeEvent.layout;
+    console.log({x, y, width, height});
+  }}>
+  {chapter.map((row, idx) => (
+    <Text
+      style={{fontSize: 14}}
+      key={`item-${idx}`}
+      onPress={event => {
+        onTextPress(event, row.content);
+      }}>
+      {row.content}
+    </Text>
+  ))}
+</View>; */
 
 export default App;
