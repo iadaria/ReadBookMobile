@@ -2,11 +2,17 @@ import {useReducer} from 'react';
 import {MainScreen} from './screens/MainScreen';
 import WordContext from './store/context';
 import {wordReducer} from './store/book.reducer';
+import {Platform} from 'react-native';
 
 function App(): JSX.Element {
   const [wordState, wordDispatch] = useReducer(wordReducer, {word: null});
 
-  console.log('NODE_ENV', process.env.NODE_ENV);
+  console.log(Platform.OS);
+  if (Platform.OS === 'web') {
+    const dotenv = require('dotenv');
+    const myEnv = dotenv.config();
+    console.log({myEnv});
+  }
 
   const providerState = {
     wordState,
