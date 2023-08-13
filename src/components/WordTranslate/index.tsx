@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text} from 'react-native';
 import {useWordContext} from '../../store/context';
-import {getParticular} from '../../utils/dictionary';
+import {getTranslate} from '../../utils/dictionary';
 
 export const WordTranslate = (): JSX.Element => {
   const [translate, setTranslate] = useState<string>();
@@ -10,7 +10,9 @@ export const WordTranslate = (): JSX.Element => {
   } = useWordContext();
 
   useEffect(() => {
-    getParticular().then(setTranslate);
+    if (word) {
+      getTranslate(word).then(setTranslate);
+    }
   }, [word]);
 
   if (word) {

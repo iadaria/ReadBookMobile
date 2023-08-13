@@ -7,7 +7,7 @@ interface ParagraphProps {
 }
 
 export const Paragraph: React.FC<ParagraphProps> = ({words}): JSX.Element => {
-  const {/*wordState*/ wordDispatch} = useWordContext();
+  const {wordDispatch} = useWordContext();
 
   const onTextPress = (event: GestureResponderEvent, word: string) => {
     //console.log(event.nativeEvent.pageX);
