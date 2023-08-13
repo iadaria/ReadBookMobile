@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Text} from 'react-native';
 import {useWordContext} from '../../store/context';
 import {getTranslate} from '../../utils/dictionary';
+import {styles as s} from './WordTranslate.style';
 
 export const WordTranslate = (): JSX.Element => {
   const [translate, setTranslate] = useState<string>();
@@ -16,7 +17,7 @@ export const WordTranslate = (): JSX.Element => {
   }, [word]);
 
   if (word) {
-    return <Text>{translate}</Text>;
+    return <Text style={s.word}>{translate}</Text>;
   }
 
   return <></>;

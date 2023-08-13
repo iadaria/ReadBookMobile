@@ -18,6 +18,18 @@ export const MainScreen = () => {
     getChapter().then(setChapter);
   }, []);
 
+  useEffect(() => {
+    // @ts-ignore
+    if (global.window === undefined) {
+      // @ts-ignore
+      global.window = global;
+    }
+    // @ts-ignore
+    const window = global.window;
+    const synth = window.speechSynthesis;
+    console.log({synth});
+  }, []);
+
   return (
     <SafeAreaView>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
