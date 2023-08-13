@@ -1,3 +1,4 @@
+import React from 'react';
 import {GestureResponderEvent, Text} from 'react-native';
 import {useWordContext} from '../../store/context';
 

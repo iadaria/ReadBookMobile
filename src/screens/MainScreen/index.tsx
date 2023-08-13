@@ -15,7 +15,7 @@ export const MainScreen = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   useEffect(() => {
-    getChapter().then(chapter => setChapter(chapter));
+    getChapter().then(setChapter);
   }, []);
 
   return (
