@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {FC, useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {synth} from '../../../common/synth.constant';
+import {Picker} from '@react-native-picker/picker';
 
 interface Props {
   selected?: number;
@@ -24,10 +24,19 @@ export function VoiceSelector({selected, setSelected}: Props) {
   }, [populateVoiceList]);
 
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+    <Picker
+      selectedValue={selected}
+      onValueChange={itemValue => {
+        setSelected(itemValue);
+      }}>
+      {voices?.map((voice, index) => (
+        <Picker.Item
+          label={`${voice.name} (${voice.lang} ${
+            voice.default && ' [Default]'
+          })`}
+          value={index}
+        />
+      ))}
+    </Picker>
   );
 }
-
-const styles = StyleSheet.create({});
