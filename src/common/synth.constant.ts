@@ -4,5 +4,5 @@ if (global.window === undefined) {
   global.window = global;
 }
 // @ts-ignore
-const window = global.window;
+export const window = global.window;
 export const synth = window.speechSynthesis;

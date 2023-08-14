@@ -9,7 +9,6 @@ import {
 import {Line} from '../../common/types';
 import {getChapter} from '../../requests/chapter';
 import {Chapter} from '../../components/Chapter';
-import {TtsForm} from '../../components/synth/TtsForm';
 
 export const MainScreen = () => {
   const [chapter, setChapter] = useState<Line[]>([]);
@@ -25,7 +24,6 @@ export const MainScreen = () => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View>
           <Chapter paragraphs={chapter} />
-          <TtsForm />
         </View>
       </ScrollView>
     </SafeAreaView>

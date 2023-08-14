@@ -6,7 +6,9 @@ import {styles as s} from './TtsForm.styles';
 
 export const TtsForm = () => {
   const [textValue, setTextValue] = useState<string>('');
-  const [selectedVoice, setSelectedVoice] = useState<number>(0);
+  const [selectedVoice, setSelectedVoice] = useState<number>(50);
+
+  console.log({selectedVoice});
 
   if (!synth)
     return <Text>Aw... your browser does not support Speech Synthesis</Text>;
