@@ -13,14 +13,17 @@
     "web-start": "NODE_ENV=development react-scripts start",
     "web-build": "react-scripts build",
     "web-test": "react-scripts test --env=jsdom",
-    "web-eject": "react-scripts eject"
+    "web-eject": "react-scripts eject",
+    "macos-run": "react-native run-macos"
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.4.10",
     "path-browserify": "^1.0.1",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "0.72.3",
     "react-native-config": "^1.5.1",
+    "react-native-macos": "^0.71.0-0",
     "react-native-web": "^0.19.7",
     "react-scripts": "^5.0.1"
   },
