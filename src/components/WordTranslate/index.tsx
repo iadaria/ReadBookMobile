@@ -5,19 +5,17 @@ import {styles as s} from './WordTranslate.style';
 import {webSpeak} from '../../utils/web/tts';
 import {useWord} from '../../store/context';
 
-const VOICE_ID = 50;
-
 export const WordTranslate = (): JSX.Element => {
   const [translate, setTranslate] = useState<string>();
-  const {word} = useWord();
+  const {word, voiceName} = useWord();
 
   useEffect(() => {
     if (word) {
       // isWeb
-      webSpeak(VOICE_ID, word);
+      webSpeak(word, voiceName);
       getTranslate(word).then(setTranslate);
     }
-  }, [word]);
+  }, [word, voiceName]);
 
   if (word) {
     return <Text style={s.word}>{translate}</Text>;

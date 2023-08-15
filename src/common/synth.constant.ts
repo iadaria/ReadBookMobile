@@ -1,3 +1,5 @@
+export const DEFAULT_VOICE_NAME = 'Alex';
+
 // @ts-ignore
 if (global.window === undefined) {
   // @ts-ignore

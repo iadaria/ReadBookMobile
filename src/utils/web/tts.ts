@@ -1,9 +1,19 @@
 import {synth} from '../../common/synth.constant';
 
-export const webSpeak = (voiceId: number, text: string) => {
+export const webSpeak = (text: string, voiceName?: string) => {
   //@ts-ignore
-  var utterance = new SpeechSynthesisUtterance(text);
-  utterance.voice = synth.getVoices()[voiceId];
+  const utterance = new SpeechSynthesisUtterance(text);
+  let voice;
+  if (voiceName) {
+    voice = synth.getVoices().find((v: any) => equal(v.name, voiceName));
+  } else {
+    voice = synth.getVoices()[0];
+  }
+  utterance.voice = voice;
 
+  console.log(voiceName, 'speaking with', voice.name);
   synth.speak(utterance);
 };
+
+export const equal = (a1: string, a2: string) =>
+  a1.toLowerCase() === a2.toLowerCase();

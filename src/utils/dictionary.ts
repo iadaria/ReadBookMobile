@@ -3,7 +3,7 @@ import {requestWord} from '../requests/dictionary.request';
 
 export async function getTranslate(text: string) {
   const dictionary = await requestWord(text);
-  console.log({dictionary});
+  //console.log({dictionary});
   return getParticular(dictionary);
 }
 

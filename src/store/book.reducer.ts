@@ -1,12 +1,12 @@
 export type State = {
   word?: string | null;
-  voiceId?: number;
+  voiceName?: string;
 };
 
 export type Action = {
   type: string;
   word?: string | null;
-  voiceId?: number;
+  voiceName?: string;
 };
 
 export function wordReducer(state: State, action: Action) {
@@ -20,11 +20,11 @@ export function wordReducer(state: State, action: Action) {
     case 'set_voice': {
       return {
         ...state,
-        voiceId: action.voiceId,
+        voiceName: action.voiceName,
       };
     }
   }
   throw Error('Unknown action: ' + action.type);
 }
 
-export const initialWord = {word: null, voiceId: 0};
+export const initialWord = {word: null};

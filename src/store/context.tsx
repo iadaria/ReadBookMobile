@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useReducer} from 'react';
 import {Action, State, initialWord, wordReducer} from './book.reducer';
 
-const WordContext = createContext<State>({word: null, voiceId: 0});
+const WordContext = createContext<State>({word: null});
 
 const WordDispatchContext = createContext<React.Dispatch<Action>>(() => {});
 

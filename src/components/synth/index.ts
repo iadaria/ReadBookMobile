@@ -1,1 +1,1 @@
-export {VoiceSelector} from './VoiceSelector';
+export {WebVoiceSelector} from './WebVoiceSelector';

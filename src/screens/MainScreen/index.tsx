@@ -9,6 +9,7 @@ import {
 import {Line} from '../../common/types';
 import {getChapter} from '../../requests/chapter';
 import {Chapter} from '../../components/Chapter';
+//import {WebVoiceSelector} from '../../components/synth';
 
 export const MainScreen = () => {
   const [chapter, setChapter] = useState<Line[]>([]);
@@ -23,6 +24,7 @@ export const MainScreen = () => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View>
+          {/* <WebVoiceSelector /> */}
           <Chapter paragraphs={chapter} />
         </View>
       </ScrollView>
