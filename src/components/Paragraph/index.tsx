@@ -1,17 +1,20 @@
 import React from 'react';
 import {GestureResponderEvent, Text} from 'react-native';
-import {useWordContext} from '../../store/context';
+import {useWordDispatch} from '../../store/context';
 
 interface ParagraphProps {
   words: string[];
 }
 
 export const Paragraph: React.FC<ParagraphProps> = ({words}): JSX.Element => {
-  const {wordDispatch} = useWordContext();
+  const dispatch = useWordDispatch();
 
   const onTextPress = (event: GestureResponderEvent, word: string) => {
     //console.log(event.nativeEvent.pageX);
-    wordDispatch({type: 'set_word', word});
+    dispatch({
+      type: 'set_word',
+      word,
+    });
   };
   const Words = words.map((word, index) => (
     <Text

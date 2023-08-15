@@ -1,17 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {Text} from 'react-native';
-import {useWordContext} from '../../store/context';
 import {getTranslate} from '../../utils/dictionary';
 import {styles as s} from './WordTranslate.style';
 import {webSpeak} from '../../utils/web/tts';
+import {useWord} from '../../store/context';
 
 const VOICE_ID = 50;
 
 export const WordTranslate = (): JSX.Element => {
   const [translate, setTranslate] = useState<string>();
-  const {
-    wordState: {word},
-  } = useWordContext();
+  const {word} = useWord();
 
   useEffect(() => {
     if (word) {
