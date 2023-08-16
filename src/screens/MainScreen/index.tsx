@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import {Line} from '../../common/types';
-import {getChapter} from '../../requests/chapter';
+import {getChapter} from '../../requests/chapter.request';
 import {Chapter} from '../../components/common/Chapter';
 import {styles as s} from './styles';
 import {WebVoiceSelector} from '../../components/synth';
