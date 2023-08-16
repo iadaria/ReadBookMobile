@@ -1,6 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
+  box: {
+    paddingVertical: 6,
+  },
   play: {
     width: 12,
     height: 12,
