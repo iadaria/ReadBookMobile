@@ -21,6 +21,7 @@ module.exports = function (api) {
       [
         'module-resolver',
         {
+          root: ['.'],
           extensions: [
             '.js',
             '.jsx',
@@ -31,7 +32,7 @@ module.exports = function (api) {
             '.ios.js',
             '.ios.tsx',
           ],
-          alias: getAliases(),
+          alias: getAliases(), // or components: "./src/components"
         },
       ],
     ],
