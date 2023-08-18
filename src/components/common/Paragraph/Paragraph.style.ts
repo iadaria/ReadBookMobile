@@ -14,4 +14,9 @@ export const styles = StyleSheet.create({
     height: 12,
     marginLeft: 2,
   },
+  translatedParagraph: {
+    fontSize: 12,
+    marginTop: 5,
+    marginBottom: 2,
+  },
 });

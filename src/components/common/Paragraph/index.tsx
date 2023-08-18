@@ -21,8 +21,8 @@ const TranslatedParagraph: FC<TranslatedParagraphProps> = ({content}) => {
 
   useMemo(async () => {
     if (!text) {
-      const text = await translateParagraph(content);
-      setText(text);
+      const tr = await translateParagraph(content);
+      setText(tr);
     }
   }, [content, text]);
 
@@ -30,7 +30,7 @@ const TranslatedParagraph: FC<TranslatedParagraphProps> = ({content}) => {
     return <></>;
   }
 
-  return <Text>{text}</Text>;
+  return <Text style={s.translatedParagraph}>{text}</Text>;
 };
 
 interface ParagraphProps {

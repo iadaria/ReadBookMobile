@@ -1,7 +1,7 @@
 import {environment as env} from '../common/environment';
 
 export const getChapter = async () => {
-  const res: Response = await fetch(`${env.baseUrl}/chapter`, {
+  const res: Response = await fetch(`${env.baseUrl}/book/chapter`, {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',

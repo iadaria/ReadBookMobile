@@ -6,12 +6,12 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import {Line} from '../../common/types';
-import {getChapter} from '../../requests/chapter.request';
-import {Chapter} from '../../components/common/Chapter';
+
+import {getChapter} from 'requests/chapter.request';
 import {styles as s} from './styles';
 import {WebVoiceSelector} from '../../components/synth';
-
+import {Line} from 'common/types';
+import {Chapter} from 'components/common/Chapter';
 //import {WebVoiceSelector} from '../../components/synth';
 
 export const MainScreen = () => {
