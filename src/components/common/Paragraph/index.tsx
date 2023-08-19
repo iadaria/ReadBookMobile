@@ -1,4 +1,4 @@
-import React, {FC, useMemo, useState} from 'react';
+import React, {useState} from 'react';
 import {
   GestureResponderEvent,
   Image,
@@ -6,37 +6,38 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {styles as s} from './Paragraph.style';
 import {useWord, useWordDispatch} from '../../../store/context';
 import {webSpeak} from 'src/utils/web/tts';
-import {translateParagraph} from 'src/requests/paragraph.request';
+import {TagName} from '@app-types/chapter';
+import {TranslatedParagraph} from '../TranslatedParagraph';
+import {styles as s} from './Paragraph.style';
 
-interface TranslatedParagraphProps {
-  content: string;
-}
+// interface TagWrapperProps {
+//   tagName: TagName;
+//   children: any;
+//   //children: JSX.Element[] | JSX.Element;
+//   //children: ReactElement<any, any> | null | ReactElement<any, any>[];
+// }
 
-const TranslatedParagraph: FC<TranslatedParagraphProps> = ({content}) => {
-  const [text, setText] = useState<undefined | string>('');
-
-  useMemo(async () => {
-    if (!text) {
-      const tr = await translateParagraph(content);
-      setText(tr);
-    }
-  }, [content, text]);
-
-  if (!content) {
-    return <></>;
+/* const TagWrapper: FC<TagWrapperProps> = ({tagName, children}) => {
+  console.log(tagName);
+  let style;
+  switch (tagName) {
+    case 'p':
+      style = {};
   }
-
-  return <Text style={s.translatedParagraph}>{text}</Text>;
-};
+  return children;
+}; */
 
 interface ParagraphProps {
   content: string;
+  tagName: TagName;
 }
 
-export const Paragraph: React.FC<ParagraphProps> = ({content}): JSX.Element => {
+export const Paragraph: React.FC<ParagraphProps> = ({
+  content,
+  tagName,
+}): JSX.Element => {
   const [isTranslate, toggleTranslate] = useState(false);
 
   const {voiceName} = useWord();
@@ -53,9 +54,11 @@ export const Paragraph: React.FC<ParagraphProps> = ({content}): JSX.Element => {
       onPress={event => onTextPress(event, word)}>{`${word} `}</Text>
   ));
 
+  const tagToStyle = tagName as keyof typeof s;
+
   return (
     <>
-      <Text style={s.box}>
+      <Text style={[s.box, s[tagToStyle]]}>
         <TouchableOpacity onPress={() => webSpeak(content, voiceName)}>
           <Image style={s.play} source={require('./play.png')} />
         </TouchableOpacity>
@@ -64,7 +67,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({content}): JSX.Element => {
           <Image style={s.translate} source={require('./translate.png')} />
         </TouchableOpacity>
       </Text>
-      {isTranslate && <TranslatedParagraph content={content} />}
+      {isTranslate ? <TranslatedParagraph content={content} /> : <></>}
     </>
   );
 };

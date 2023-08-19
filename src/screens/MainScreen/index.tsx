@@ -8,11 +8,10 @@ import {
 } from 'react-native';
 
 import {styles as s} from './styles';
-import {WebVoiceSelector} from '../../components/synth';
-import {Line} from 'src/common/types';
+import {WebVoiceSelector} from 'src/components/synth';
 import {getChapter} from 'src/requests/chapter.request';
 import {Chapter} from 'src/components/common/Chapter';
-//import {WebVoiceSelector} from '../../components/synth';
+import {Line} from '@app-types/chapter';
 
 export const MainScreen = () => {
   const [chapter, setChapter] = useState<Line[]>([]);
