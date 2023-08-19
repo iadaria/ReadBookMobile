@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {
-  SafeAreaView,
+  //SafeAreaView,
   ScrollView,
   StatusBar,
-  useColorScheme,
   View,
+  useColorScheme,
 } from 'react-native';
 
-import {getChapter} from 'requests/chapter.request';
 import {styles as s} from './styles';
 import {WebVoiceSelector} from '../../components/synth';
-import {Line} from 'common/types';
-import {Chapter} from 'components/common/Chapter';
+import {Line} from 'src/common/types';
+import {getChapter} from 'src/requests/chapter.request';
+import {Chapter} from 'src/components/common/Chapter';
 //import {WebVoiceSelector} from '../../components/synth';
 
 export const MainScreen = () => {
@@ -23,14 +23,14 @@ export const MainScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView>
+    <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <ScrollView>
         <View style={s.box}>
           <WebVoiceSelector />
           <Chapter paragraphs={chapter} />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </>
   );
 };

@@ -2,18 +2,24 @@
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
     "typeRoots": ["./src/types"],
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       //"@/*": ["/src/*"],
-      "@assets/*": ["assets/*"],
-      "@components/*": ["components/common/*"],
-      "@contexts/*": ["contexts/*"],
-      "@hooks/*": ["hooks/*"],
-      "@modules/*": ["modules/*"],
-      "@navigators/*": ["navigators/*"],
-      "@screens/*": ["screens/*"],
-      "@app-types/*": ["@types/*"],
-      "@utils/*": ["utils/*"]
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@modules/*": ["src/modules/*"],
+      "@navigators/*": ["src/navigators/*"],
+      "@screens/*": ["src/screens/*"],
+      "@app-types/*": ["src/@types/*"],
+      "@utils/*": ["src/utils/*"]
     }
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ]
 }

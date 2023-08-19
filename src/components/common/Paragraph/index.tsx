@@ -4,13 +4,12 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 
 import {styles as s} from './Paragraph.style';
 import {useWord, useWordDispatch} from '../../../store/context';
-import {webSpeak} from '../../../utils/web/tts';
-import {translateParagraph} from '../../../requests/paragraph.request';
+import {webSpeak} from 'src/utils/web/tts';
+import {translateParagraph} from 'src/requests/paragraph.request';
 
 interface TranslatedParagraphProps {
   content: string;
@@ -55,8 +54,8 @@ export const Paragraph: React.FC<ParagraphProps> = ({content}): JSX.Element => {
   ));
 
   return (
-    <View style={s.box}>
-      <Text>
+    <>
+      <Text style={s.box}>
         <TouchableOpacity onPress={() => webSpeak(content, voiceName)}>
           <Image style={s.play} source={require('./play.png')} />
         </TouchableOpacity>
@@ -66,6 +65,6 @@ export const Paragraph: React.FC<ParagraphProps> = ({content}): JSX.Element => {
         </TouchableOpacity>
       </Text>
       {isTranslate && <TranslatedParagraph content={content} />}
-    </View>
+    </>
   );
 };
