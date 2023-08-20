@@ -13,6 +13,7 @@ export const WordTranslate = (): JSX.Element => {
   useEffect(() => {
     if (word) {
       // isWeb
+      console.log(`selected word: "${word}"`);
       webSpeak(word, voiceName);
       getTranslate(word).then(setTranslate);
     }

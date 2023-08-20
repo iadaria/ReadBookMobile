@@ -30,7 +30,9 @@ export interface ParagraphProps {
   p: Line;
 }
 
-export const Paragraph: React.FC<ParagraphProps> = ({p}): JSX.Element => {
+export const Paragraph: React.FC<ParagraphProps> = ({
+  p: {tagName, includes, content},
+}): JSX.Element => {
   const [isTranslate, toggleTranslate] = useState(false);
 
   const {voiceName} = useWord();
@@ -42,7 +44,13 @@ export const Paragraph: React.FC<ParagraphProps> = ({p}): JSX.Element => {
 
   const tagToStyle = (tag: TagName) => tag as keyof typeof s;
 
-  const tags = [{tagName: p.tagName, content: p.content}, ...p.includes];
+  const tags = [{tagName, content}, ...includes]
+    // delete '\n
+    .map(tag => {
+      if (['p', 'strong', 'code'].includes(tag.tagName))
+        return {...tag, content: tag.content.replaceAll('\n', ' ')};
+      return tag;
+    });
 
   //console.log({tags});
 
@@ -57,20 +65,17 @@ export const Paragraph: React.FC<ParagraphProps> = ({p}): JSX.Element => {
     ));
   });
 
-  const content = tags.map(tag => tag.content).join();
+  const wholeContent = tags.map(tag => tag.content).join();
 
+  // Empty contents
   if (!tags.some(tag => tag.content.trim())) {
     return <></>;
   }
 
-  /* if (!p.content.trim() && !p.includes.length) {
-    return <></>;
-  } */
-
   return (
     <>
-      <Text style={[s.box, s[tagToStyle(p.tagName)]]}>
-        <TouchableOpacity onPress={() => webSpeak(content, voiceName)}>
+      <Text style={[s.box, s[tagToStyle(tagName)]]}>
+        <TouchableOpacity onPress={() => webSpeak(wholeContent, voiceName)}>
           <Image style={s.play} source={require('./play.png')} />
         </TouchableOpacity>
         {Words}
@@ -78,7 +83,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({p}): JSX.Element => {
           <Image style={s.translate} source={require('./translate.png')} />
         </TouchableOpacity>
       </Text>
-      {isTranslate ? <TranslatedParagraph content={content} /> : <></>}
+      {isTranslate ? <TranslatedParagraph content={wholeContent} /> : <></>}
     </>
   );
 };
