@@ -27,8 +27,10 @@ export const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   span: {
-    backgroundColor: 'grey',
-    fontWeight: 'bold',
+    color: '#3730a3',
+    //backgroundColor: '#a5b4fc',
+    //fontWeight: 'bold',
+    //fontStyle: 'italic',
   },
   code: {},
   p: {},

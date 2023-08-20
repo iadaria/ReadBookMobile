@@ -42,14 +42,12 @@ export const Paragraph: React.FC<ParagraphProps> = ({p}): JSX.Element => {
 
   const tagToStyle = (tag: TagName) => tag as keyof typeof s;
 
-  const tags = [{tagName: p.tagName, content: p.content}, ...p.includes].map(
-    tag => ({...tag, content: tag.content.replaceAll('\n', ' ')}),
-  );
+  const tags = [{tagName: p.tagName, content: p.content}, ...p.includes];
 
   //console.log({tags});
 
   const Words = tags.map(tag => {
-    const words = tag.content.split(' ');
+    const words = tag.content.split(' '); /* .filter(word => !!word.trim()); */
 
     return words.map((word, index) => (
       <Text
@@ -60,7 +58,15 @@ export const Paragraph: React.FC<ParagraphProps> = ({p}): JSX.Element => {
   });
 
   const content = tags.map(tag => tag.content).join();
-  //console.log({content});
+
+  if (!tags.some(tag => tag.content.trim())) {
+    return <></>;
+  }
+
+  /* if (!p.content.trim() && !p.includes.length) {
+    return <></>;
+  } */
+
   return (
     <>
       <Text style={[s.box, s[tagToStyle(p.tagName)]]}>
