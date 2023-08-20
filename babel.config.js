@@ -32,7 +32,7 @@ module.exports = function (api) {
             '.ios.js',
             '.ios.tsx',
           ],
-          alias: {components: './src/components'},
+          //alias: {components: './src/components'},
         },
       ],
     ],

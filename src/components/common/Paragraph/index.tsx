@@ -47,15 +47,14 @@ export const Paragraph: React.FC<ParagraphProps> = ({
   const tags = [{tagName, content}, ...includes]
     // delete '\n
     .map(tag => {
-      if (['p', 'strong', 'code'].includes(tag.tagName))
+      if (['p', 'strong', 'code', 'a', 'em'].includes(tag.tagName))
         return {...tag, content: tag.content.replaceAll('\n', ' ')};
       return tag;
-    });
-
-  //console.log({tags});
+    })
+    .filter(tag => tag.content !== '\uf0c1');
 
   const Words = tags.map(tag => {
-    const words = tag.content.split(' '); /* .filter(word => !!word.trim()); */
+    const words = tag.content.split(' ');
 
     return words.map((word, index) => (
       <Text

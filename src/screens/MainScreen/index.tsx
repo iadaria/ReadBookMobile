@@ -12,6 +12,7 @@ import {WebVoiceSelector} from 'src/components/synth';
 import {getChapter} from 'src/requests/chapter.request';
 import {Chapter} from 'src/components/common/Chapter';
 import {Line} from '@app-types/chapter';
+import {WordTranslate} from 'src/components/common/WordTranslate';
 
 export const MainScreen = () => {
   const [chapter, setChapter] = useState<Line[]>([]);
@@ -24,6 +25,7 @@ export const MainScreen = () => {
   return (
     <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <WordTranslate />
       <ScrollView>
         <View style={s.box}>
           <WebVoiceSelector />

@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
   h3: {
     fontSize: 14,
     fontStyle: 'italic',
+    fontWeight: 'bold',
   },
   span: {
     color: '#3730a3',

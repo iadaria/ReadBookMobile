@@ -1,6 +1,5 @@
 import React from 'react';
 import {Paragraph} from '../Paragraph';
-import {WordTranslate} from '../WordTranslate';
 import {Line} from '@app-types/chapter';
 
 interface ChapterProps {
@@ -12,10 +11,5 @@ export const Chapter: React.FC<ChapterProps> = ({paragraphs}) => {
     return <Paragraph p={line} />;
   });
 
-  return (
-    <>
-      <WordTranslate />
-      {Lines}
-    </>
-  );
+  return <>{Lines}</>;
 };
