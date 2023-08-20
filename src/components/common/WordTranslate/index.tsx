@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text} from 'react-native';
+import {Image, Text, TouchableOpacity} from 'react-native';
 
 import {styles as s} from './WordTranslate.style';
 import {useWord} from 'src/store/context';
@@ -19,7 +19,14 @@ export const WordTranslate = (): JSX.Element => {
   }, [word, voiceName]);
 
   if (word) {
-    return <Text style={s.word}>{translate}</Text>;
+    return (
+      <Text style={s.word}>
+        <TouchableOpacity onPress={() => webSpeak(word, voiceName)}>
+          <Image style={s.play} source={require('./play.png')} />
+        </TouchableOpacity>
+        {translate}
+      </Text>
+    );
   }
 
   return <></>;

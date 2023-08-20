@@ -8,57 +8,62 @@ import {
 
 import {useWord, useWordDispatch} from '../../../store/context';
 import {webSpeak} from 'src/utils/web/tts';
-import {TagName} from '@app-types/chapter';
+import {Line, TagName} from '@app-types/chapter';
 import {TranslatedParagraph} from '../TranslatedParagraph';
 import {styles as s} from './Paragraph.style';
 
-// interface TagWrapperProps {
-//   tagName: TagName;
-//   children: any;
-//   //children: JSX.Element[] | JSX.Element;
-//   //children: ReactElement<any, any> | null | ReactElement<any, any>[];
-// }
-
-/* const TagWrapper: FC<TagWrapperProps> = ({tagName, children}) => {
-  console.log(tagName);
-  let style;
-  switch (tagName) {
-    case 'p':
-      style = {};
-  }
-  return children;
-}; */
-
-interface ParagraphProps {
-  content: string;
+/* interface TagWrapperProps {
   tagName: TagName;
+  children: any;
 }
 
-export const Paragraph: React.FC<ParagraphProps> = ({
-  content,
-  tagName,
-}): JSX.Element => {
+const TagWrapper:React.FC<TagWrapperProps> = ({tagName, children}) => {
+
+  switch (tagName) {
+    case 'li':
+      return ;
+  }
+  return <Text>children</Text>;
+}; */
+
+export interface ParagraphProps {
+  p: Line;
+}
+
+export const Paragraph: React.FC<ParagraphProps> = ({p}): JSX.Element => {
   const [isTranslate, toggleTranslate] = useState(false);
 
   const {voiceName} = useWord();
   const dispatch = useWordDispatch();
-  const words = content.split(' ');
 
   const onTextPress = (event: GestureResponderEvent, word: string) => {
     dispatch({type: 'set_word', word});
   };
 
-  const Words = words.map((word, index) => (
-    <Text
-      key={`item-${index}`}
-      onPress={event => onTextPress(event, word)}>{`${word} `}</Text>
-  ));
+  const tagToStyle = (tag: TagName) => tag as keyof typeof s;
 
-  const tagToStyle = tagName as keyof typeof s;
+  const tags = [{tagName: p.tagName, content: p.content}, ...p.includes].map(
+    tag => ({...tag, content: tag.content.replaceAll('\n', ' ')}),
+  );
 
+  //console.log({tags});
+
+  const Words = tags.map(tag => {
+    const words = tag.content.split(' ');
+
+    return words.map((word, index) => (
+      <Text
+        key={`item-${index}`}
+        style={s[tagToStyle(tag.tagName)]}
+        onPress={event => onTextPress(event, word)}>{`${word} `}</Text>
+    ));
+  });
+
+  const content = tags.map(tag => tag.content).join();
+  //console.log({content});
   return (
     <>
-      <Text style={[s.box, s[tagToStyle]]}>
+      <Text style={[s.box, s[tagToStyle(p.tagName)]]}>
         <TouchableOpacity onPress={() => webSpeak(content, voiceName)}>
           <Image style={s.play} source={require('./play.png')} />
         </TouchableOpacity>

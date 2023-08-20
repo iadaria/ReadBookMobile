@@ -1,8 +1,16 @@
-export const Tags = ['h1', 'h2', 'h3', 'p'];
+export const Tags = ['h1', 'h2', 'h3', 'p', 'li'];
 
-export type TagName = 'h1' | 'h2' | 'h3' | 'p';
+export type TagName = 'p' | 'h1' | 'h2' | 'h3' | 'code' | 'span' | 'li';
 
 export type Line = {
   tagName: TagName;
   content: string;
+  includes: Line[];
 };
+
+/* export type Paragraph = {
+  tagName: TagName;
+  content: string;
+  includes: Paragraph[];
+};
+ */

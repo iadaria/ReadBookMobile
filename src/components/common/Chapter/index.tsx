@@ -8,8 +8,8 @@ interface ChapterProps {
 }
 
 export const Chapter: React.FC<ChapterProps> = ({paragraphs}) => {
-  const Lines = paragraphs.map(({content, tagName}) => {
-    return <Paragraph content={content} tagName={tagName} />;
+  const Lines = paragraphs.map(line => {
+    return <Paragraph p={line} />;
   });
 
   return (

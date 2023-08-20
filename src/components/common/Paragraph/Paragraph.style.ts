@@ -26,4 +26,11 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontStyle: 'italic',
   },
+  span: {
+    backgroundColor: 'grey',
+    fontWeight: 'bold',
+  },
+  code: {},
+  p: {},
+  li: {},
 });

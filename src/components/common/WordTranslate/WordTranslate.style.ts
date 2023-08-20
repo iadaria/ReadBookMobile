@@ -15,4 +15,9 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 0,
   },
+  play: {
+    width: 12,
+    height: 12,
+    marginRight: 2,
+  },
 });
