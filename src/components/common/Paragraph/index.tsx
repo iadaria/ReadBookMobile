@@ -51,11 +51,17 @@ export const Paragraph: React.FC<ParagraphProps> = ({
     ));
   });
 
+  const oneWord = Words[0].length <= 1;
+
   const wholeContent = tags.map(tag => tag.content).join();
 
   // Empty contents
   if (!tags.some(tag => tag.content.trim())) {
     return <></>;
+  }
+
+  if (oneWord) {
+    return <Text style={s.box}>{Words}</Text>;
   }
 
   return (
