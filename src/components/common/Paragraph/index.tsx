@@ -53,8 +53,6 @@ export const Paragraph: React.FC<ParagraphProps> = ({
 
   const oneWord = Words[0].length <= 1;
 
-  const wholeContent = tags.map(tag => tag.content).join();
-
   // Empty contents
   if (!tags.some(tag => tag.content.trim())) {
     return <></>;
@@ -64,6 +62,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({
     return <Text style={s.box}>{Words}</Text>;
   }
 
+  const wholeContent = tags.map(tag => tag.content).join();
   return (
     <>
       <Text style={[s.box, s[tagToStyle(tagName)]]}>

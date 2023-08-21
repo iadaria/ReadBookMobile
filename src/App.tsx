@@ -1,11 +1,11 @@
 import React from 'react';
-import {MainScreen} from './screens/MainScreen';
 import {WordProvider} from './store/context';
+import {Navigator} from './navigator';
 
 function App(): JSX.Element {
   return (
     <WordProvider>
-      <MainScreen />
+      <Navigator />
     </WordProvider>
   );
 }
