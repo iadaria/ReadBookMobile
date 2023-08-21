@@ -6,36 +6,23 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {useWord, useWordDispatch} from '../../../store/context';
-import {webSpeak} from 'src/utils/web/tts';
+import {useWordDispatch} from 'src/store/context';
 import {Line, TagName} from '@app-types/chapter';
 import {TranslatedParagraph} from '../TranslatedParagraph';
 import {styles as s} from './Paragraph.style';
-
-/* interface TagWrapperProps {
-  tagName: TagName;
-  children: any;
-}
-
-const TagWrapper:React.FC<TagWrapperProps> = ({tagName, children}) => {
-
-  switch (tagName) {
-    case 'li':
-      return ;
-  }
-  return <Text>children</Text>;
-}; */
+import {SpeakSignPlay} from '../SpeakSignPlay';
 
 export interface ParagraphProps {
   p: Line;
+  idx: number;
 }
 
 export const Paragraph: React.FC<ParagraphProps> = ({
   p: {tagName, includes, content},
+  idx,
 }): JSX.Element => {
   const [isTranslate, toggleTranslate] = useState(false);
 
-  const {voiceName} = useWord();
   const dispatch = useWordDispatch();
 
   const onTextPress = (event: GestureResponderEvent, word: string) => {
@@ -74,9 +61,7 @@ export const Paragraph: React.FC<ParagraphProps> = ({
   return (
     <>
       <Text style={[s.box, s[tagToStyle(tagName)]]}>
-        <TouchableOpacity onPress={() => webSpeak(wholeContent, voiceName)}>
-          <Image style={s.play} source={require('./play.png')} />
-        </TouchableOpacity>
+        <SpeakSignPlay text={wholeContent} idx={idx} />
         {Words}
         <TouchableOpacity onPress={() => toggleTranslate(!isTranslate)}>
           <Image style={s.translate} source={require('./translate.png')} />
@@ -86,3 +71,17 @@ export const Paragraph: React.FC<ParagraphProps> = ({
     </>
   );
 };
+
+/* interface TagWrapperProps {
+  tagName: TagName;
+  children: any;
+}
+
+const TagWrapper:React.FC<TagWrapperProps> = ({tagName, children}) => {
+
+  switch (tagName) {
+    case 'li':
+      return ;
+  }
+  return <Text>children</Text>;
+}; */
