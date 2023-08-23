@@ -3,7 +3,7 @@ import {synth} from 'src/common/synth.constant';
 import {useWord, useWordDispatch} from 'src/store/context';
 
 export function useDetectSpeaking() {
-  const [timer, setTimer] = useState<NodeJS.Timer>();
+  const [timer, setTimer] = useState<NodeJS.Timeout>();
   const {
     speak: {isSpeaking},
   } = useWord();

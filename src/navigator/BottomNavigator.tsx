@@ -1,6 +1,6 @@
-import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Button, View} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React from 'react';
 
 function HomeScreen({navigation}: any) {
   return (
@@ -21,13 +21,13 @@ function NotificationsScreen({navigation}: any) {
   );
 }
 
-const Drawer = createDrawerNavigator();
+const BottomTab = createBottomTabNavigator();
 
-export default function DrawerNavigator() {
+export function BottomNavigator() {
   return (
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-    </Drawer.Navigator>
+    <BottomTab.Navigator>
+      <BottomTab.Screen name="Home" component={HomeScreen} />
+      <BottomTab.Screen name="Settings" component={NotificationsScreen} />
+    </BottomTab.Navigator>
   );
 }

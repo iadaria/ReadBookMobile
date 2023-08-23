@@ -1,3 +1,4 @@
+import React from 'react';
 import {FC, useMemo, useState} from 'react';
 import {Text} from 'react-native';
 import {styles as s} from './TranslatedParagraph.style';
