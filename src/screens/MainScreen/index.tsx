@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
+  Platform,
   //SafeAreaView,
   ScrollView,
   StatusBar,
@@ -10,10 +11,10 @@ import {
 import {WebVoiceSelector} from 'src/components/synth';
 import {getChapter} from 'src/requests/chapter.request';
 import {Chapter} from 'src/components/common/Chapter';
-import {Line} from '@app-types/chapter';
 import {WordTranslate} from 'src/components/common/WordTranslate';
 import {useDetectSpeaking} from 'src/hooks/useDetectSpeaking';
 import {styles as s} from './styles';
+import {Line} from 'src/@types/chapter';
 
 export const MainScreen = () => {
   const [chapter, setChapter] = useState<Line[]>([]);
@@ -31,7 +32,7 @@ export const MainScreen = () => {
       <WordTranslate />
       <ScrollView>
         <View style={s.box}>
-          <WebVoiceSelector />
+          {Platform.OS === 'web' && <WebVoiceSelector />}
           <Chapter paragraphs={chapter} />
         </View>
       </ScrollView>

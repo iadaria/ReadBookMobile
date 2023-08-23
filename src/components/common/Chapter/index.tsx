@@ -1,6 +1,6 @@
 import React from 'react';
 import {Paragraph} from '../Paragraph';
-import {Line} from '@app-types/chapter';
+import {Line} from 'src/@types/chapter';
 
 interface ChapterProps {
   paragraphs: Line[];

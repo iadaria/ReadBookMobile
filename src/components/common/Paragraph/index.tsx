@@ -7,10 +7,10 @@ import {
 } from 'react-native';
 
 import {useWordDispatch} from 'src/store/context';
-import {Line, TagName} from '@app-types/chapter';
 import {TranslatedParagraph} from '../TranslatedParagraph';
 import {styles as s} from './Paragraph.style';
 import {SpeakSignPlay} from '../SpeakSignPlay';
+import {Line, TagName} from 'src/@types/chapter';
 
 export interface ParagraphProps {
   p: Line;
