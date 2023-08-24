@@ -18,6 +18,7 @@
     "strict": true,
     "target": "esnext",
     "useDefineForClassFields": true, */
+    "noUnusedParameters": false,
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],

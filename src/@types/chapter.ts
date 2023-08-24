@@ -8,6 +8,13 @@ export type Line = {
   includes: Line[];
 };
 
+export type Content = {
+  id: string;
+  title: string;
+  order?: number;
+  level?: number;
+};
+
 /* export type Paragraph = {
   tagName: TagName;
   content: string;

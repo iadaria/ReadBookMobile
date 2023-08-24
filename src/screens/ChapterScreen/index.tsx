@@ -9,22 +9,28 @@ import {
 } from 'react-native';
 
 import {WebVoiceSelector} from 'src/components/synth';
-import {getChapter} from 'src/requests/chapter.request';
 import {Chapter} from 'src/components/common/Chapter';
 import {WordTranslate} from 'src/components/common/WordTranslate';
 import {useDetectSpeaking} from 'src/hooks/useDetectSpeaking';
 import {styles as s} from './styles';
 import {Line} from 'src/@types/chapter';
+import {ScreenProps} from 'src/@types/screen';
+import {getChapter} from 'src/requests/chapter.request';
 
-export const MainScreen = () => {
+export function ChapterScreen({route}: ScreenProps): JSX.Element {
   const [chapter, setChapter] = useState<Line[]>([]);
   const isDarkMode = useColorScheme() === 'dark';
+  const id = route?.params?.id;
+
+  if (!id) {
+    throw new Error('Did not get chapter id');
+  }
 
   useDetectSpeaking();
 
   useEffect(() => {
-    getChapter().then(setChapter);
-  }, []);
+    getChapter(id).then(setChapter);
+  }, [id]);
 
   return (
     <>
@@ -38,4 +44,4 @@ export const MainScreen = () => {
       </ScrollView>
     </>
   );
-};
+}
