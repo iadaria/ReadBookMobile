@@ -5,4 +5,9 @@ export const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
   },
+  back: {
+    color: '#500724',
+    paddingHorizontal: 10,
+    paddingTop: 10,
+  },
 });

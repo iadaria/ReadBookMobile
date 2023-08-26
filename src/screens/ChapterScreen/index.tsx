@@ -4,6 +4,8 @@ import {
   //SafeAreaView,
   ScrollView,
   StatusBar,
+  Text,
+  TouchableOpacity,
   View,
   useColorScheme,
 } from 'react-native';
@@ -17,7 +19,7 @@ import {Line} from 'src/@types/chapter';
 import {ScreenProps} from 'src/@types/screen';
 import {getChapter} from 'src/requests/chapter.request';
 
-export function ChapterScreen({route}: ScreenProps): JSX.Element {
+export function ChapterScreen({route, navigation}: ScreenProps): JSX.Element {
   const [chapter, setChapter] = useState<Line[]>([]);
   const isDarkMode = useColorScheme() === 'dark';
   const id = route?.params?.id;
@@ -37,6 +39,11 @@ export function ChapterScreen({route}: ScreenProps): JSX.Element {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <WordTranslate />
       <ScrollView>
+        {navigation.canGoBack() && (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={s.back}>{`< Back`}</Text>
+          </TouchableOpacity>
+        )}
         <View style={s.box}>
           {Platform.OS === 'web' && <WebVoiceSelector />}
           <Chapter paragraphs={chapter} />

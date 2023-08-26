@@ -30,9 +30,9 @@ export function ContentScreen({navigation: {navigate}}: ScreenProps) {
       <StatusBar barStyle="dark-content" />
       <ScrollView>
         <View style={s.box}>
-          {contents.map(content => (
-            <TouchableOpacity onPress={() => openChapter(content.id)}>
-              <Text>{content.title}</Text>
+          {contents.map(({title, id}) => (
+            <TouchableOpacity onPress={() => openChapter(id)}>
+              <Text>{title || id}</Text>
             </TouchableOpacity>
           ))}
         </View>

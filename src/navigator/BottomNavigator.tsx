@@ -7,7 +7,14 @@ const BottomTab = createBottomTabNavigator();
 
 export function BottomNavigator() {
   return (
-    <BottomTab.Navigator>
+    <BottomTab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarIcon: () => null,
+        tabBarItemStyle: {
+          alignSelf: 'center',
+        },
+      }}>
       <BottomTab.Screen name="Content" component={ContentScreen} />
       <BottomTab.Screen name="Chapter" component={ChapterScreen} />
     </BottomTab.Navigator>
