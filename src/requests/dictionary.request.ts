@@ -5,16 +5,15 @@ const {yandex} = env;
 
 export async function requestWord(word: string): Promise<Dictionary> {
   const query = `key=${yandex.apiKeyDictionary}&lang=en-ru&text=${word}&flags=2&ui=en`;
-  try {
-    const res: Response = await fetch(`${env.dictionaryUrl}/lookup?${query}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    });
-    return res.json();
-  } catch (error) {
-    console.log('error', {error});
+  const res: Response = await fetch(`${env.dictionaryUrl}/lookup?${query}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  });
+  const result: Dictionary = await res.json();
+  if (!result.def.length) {
+    throw new Error('Empty result');
   }
-  return {head: {}, def: []};
+  return result;
 }
