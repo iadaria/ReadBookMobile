@@ -20,10 +20,18 @@ export const WordTranslate = (): JSX.Element => {
       getTranslate(word)
         .then(setTranslate)
         .catch(e => {
-          console.log('Dictionary error', e);
+          console.log('Dictionary error. Checking -e', e.message);
           const len = word.length;
           if (word[len - 1] === 's') {
             dispatch({type: 'set_word', word: word.substring(0, len - 1)});
+          }
+          throw new Error('Empty translate');
+        })
+        .catch(e => {
+          console.log('Dictionary error. Checking -es', e.message);
+          const len = word.length;
+          if (word.substring(len - 2) === 'es') {
+            dispatch({type: 'set_word', word: word.substring(0, len - 2)});
           }
         });
     }

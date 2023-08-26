@@ -1,15 +1,9 @@
-import {
-  ScrollView,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Pressable, ScrollView, StatusBar, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {styles as s} from './ContentScreen.styles';
 import {getContent} from 'src/requests/content.request';
 import {Content} from 'src/@types/chapter';
 import {ScreenProps} from 'src/@types/screen';
+import {styles as s} from './ContentScreen.styles';
 
 export function ContentScreen({navigation: {navigate}}: ScreenProps) {
   const [contents, setContents] = useState<Content[]>([]);
@@ -17,8 +11,6 @@ export function ContentScreen({navigation: {navigate}}: ScreenProps) {
   useEffect(() => {
     getContent().then(setContents);
   }, []);
-
-  console.log({contents});
 
   const openChapter = (id: string) => {
     console.log(id);
@@ -31,9 +23,9 @@ export function ContentScreen({navigation: {navigate}}: ScreenProps) {
       <ScrollView>
         <View style={s.box}>
           {contents.map(({title, id}) => (
-            <TouchableOpacity onPress={() => openChapter(id)}>
+            <Pressable key={`item-${id}`} onPress={() => openChapter(id)}>
               <Text>{title || id}</Text>
-            </TouchableOpacity>
+            </Pressable>
           ))}
         </View>
       </ScrollView>
